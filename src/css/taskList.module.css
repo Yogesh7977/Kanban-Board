@@ -1,0 +1,21 @@
+.task-ListContainer{
+    margin-top: 3em;
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+}
+
+@media (max-width: 768px) {
+    .task-ListContainer {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 10px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .task-ListContainer {
+        margin-top: 1.5em; 
+    }
+}

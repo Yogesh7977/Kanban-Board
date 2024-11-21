@@ -1,0 +1,46 @@
+.task-Item{
+    position: relative;
+    padding: 17px;
+    margin: 10px 0;
+    background-color: "white";
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.deleteButton2{
+    background: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.editButton1{
+    background: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 1.5em;
+}
+
+.editTitle{
+    border: none;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.editDescription{
+    border: none;
+    width: -webkit-fill-available;
+}
+
+.editDescription::-webkit-scrollbar{
+    display: none;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 1em;
+}

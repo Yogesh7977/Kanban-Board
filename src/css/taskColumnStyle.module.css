@@ -1,0 +1,7 @@
+.taskColumn{
+    padding: 10px;
+    min-height: auto;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    height: max-content
+}
