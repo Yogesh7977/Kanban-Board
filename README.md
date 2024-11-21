@@ -26,25 +26,30 @@ Before you begin, make sure you have the following installed on your machine:
    git clone https://github.com/Yogesh7977/Kanban-Board.git
 
 2.**Navigate to the project directory**:
+
     cd Kanban-Board
 
 3.**Install dependencies:**:
+
     -npm install
     -npm install bootstrap
     -import 'bootstrap/dist/css/bootstrap.min.css';
     -npm install axios
 
 4.**ython Backend Setup**:
+
     -Install Python from python.org.
     -Set up a virtual environment.
     -Activate the virtual environment: venv\Scripts\activate
 
 5.**Install necessary dependencies (e.g., Flask or FastAPI)**:
+
     -pip install flask
     -pip install fastapi uvicorn
     -python tasks.py
 
 6.**Start the Development Server**:
+
     -After installing the dependencies and setting up the backend (if applicable), you can start the React development            server: npm start
 
 
