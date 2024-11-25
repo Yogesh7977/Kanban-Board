@@ -10,7 +10,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # DynamoDB setup
 dynamodb = boto3.resource('dynamodb', region_name='eu-north-1')
-table = dynamodb.Table('tasksTable')  # Replace with your DynamoDB table name
+table = dynamodb.Table('tasksTable') 
 print("Tables:", list(dynamodb.tables.all()))
 # Function to fetch all tasks from DynamoDB
 
@@ -137,7 +137,6 @@ def update_task(task_id):
     updated_task = request.get_json()
 
     if 'status' in updated_task:
-        # Update only the status
         status = updated_task['status']
         response = update_task_status(task_id, status)
         if response:
@@ -146,7 +145,6 @@ def update_task(task_id):
             return jsonify({'message': 'Failed to update task status'}), 400
     
     elif 'title' in updated_task and 'description' in updated_task:
-        # Update only the title and description
         response = update_task_details(task_id, updated_task)
         if response:
             return jsonify({'message': 'Task details updated successfully'}), 200
