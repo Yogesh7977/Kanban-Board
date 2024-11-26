@@ -53,17 +53,19 @@ function App() {
 
   // Function to add a new task
   const addTasks = (newTask) => {
+    setTasks((prevTasks) => {
+        const newTasks = [...prevTasks, newTask];
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
+        return newTasks;
+      });
     console.log(newTask)
     axios.post("http://127.0.0.1:5000/tasks", newTask, {headers: {
       'Content-Type': 'application/json'
     }})
     .then((response) => {
       console.log(response.data);
-      setTasks((prevTasks) => {
-        const newTasks = [...prevTasks, newTask];
-        localStorage.setItem("tasks", JSON.stringify(newTasks));
-        return newTasks;
-      });
+      fetchTasksFromAPI();
+      sendLocalStorageDataToBackend();
     })
     .catch((error) => {
       console.error("Error adding task", error.response ? error.response.data : error);
@@ -85,42 +87,47 @@ function App() {
   }
 
   const deleteTask = (taskId) => {
-    axios.delete(`http://127.0.0.1:5000/tasks/${taskId}`)
-    .then(()=>{
-      const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
       setTasks(updatedTasks);
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    axios.delete(`http://127.0.0.1:5000/tasks/${taskId}`)
+    .then(()=>{
+      fetchTasksFromAPI();
+      sendLocalStorageDataToBackend();
     })
     .catch((error)=>{
       console.error("Error deleting task", error.response ? error.response.data : error)
-    })
-    
+    }) 
   };
 
   // This will only update task Status using id
   const updateTaskStatus = (taskId, newStatus) => {
-    axios.put(`http://127.0.0.1:5000/tasks/${taskId}`,{status: newStatus})
-    .then(()=>{
-      const updatedTasks = tasks.map((task) =>
+    const updatedTasks = tasks.map((task) =>
         task.id === taskId ? { ...task, status: newStatus } : task
       );
       setTasks(updatedTasks);
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    axios.put(`http://127.0.0.1:5000/tasks/${taskId}`,{status: newStatus})
+    .then(()=>{
+      fetchTasksFromAPI();
+      sendLocalStorageDataToBackend();
     })
-    .catch((error)=>{
+    .catch((error)=>{ 
       console.error("Error updating task status", error.response ? error.response.data : error)
     })
   };
 
   // only for edit specific tasks
   const editTask = (taskId, updatedTask) => {
-    axios.put(`http://127.0.0.1:5000/tasks/${taskId}`, updatedTask, {headers:{ 'Content-Type': 'application/json'}})
-    .then(()=>{
-      const updatedTasks = tasks.map((task) =>
+    const updatedTasks = tasks.map((task) =>
         task.id === taskId ? { ...task, ...updatedTask } : task
       );
       setTasks(updatedTasks);
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    axios.put(`http://127.0.0.1:5000/tasks/${taskId}`, updatedTask, {headers:{ 'Content-Type': 'application/json'}})
+    .then(()=>{
+      fetchTasksFromAPI();
+      sendLocalStorageDataToBackend();
     }).catch((error)=>{
       console.error("Error updating task", error.response ? error.response.data : error)
     })

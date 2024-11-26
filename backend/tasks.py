@@ -10,7 +10,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # DynamoDB setup
 dynamodb = boto3.resource('dynamodb', region_name='eu-north-1')
-table = dynamodb.Table('tasksTable')  # Replace with your DynamoDB table name
+table = dynamodb.Table('tasksTable')  
 print("Tables:", list(dynamodb.tables.all()))
 # Function to fetch all tasks from DynamoDB
 
@@ -138,7 +138,7 @@ def update_task(task_id):
 
     if 'status' in updated_task:
         # Update only the status
-        status = updated_task['status']
+        status = updated_task['status'] #Retrieves value from the key
         response = update_task_status(task_id, status)
         if response:
             return jsonify({'message': 'Task status updated successfully'}), 200
@@ -165,6 +165,6 @@ def delete_task_route(task_id):
         return jsonify({'message': 'Failed to delete task'}), 400
 
 
-# Run the app
+# Run the app So flask server start automatically
 if __name__ == '__main__':
     app.run(debug=True)
